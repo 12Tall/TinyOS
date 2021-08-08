@@ -1,4 +1,6 @@
 ; 实模式下的段定义
+; loader 被加载的入口地址
+loader_base equ 0x900
 
 ; 常用段基址
 Seg_ColorText equ 0x0b800

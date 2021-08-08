@@ -120,12 +120,14 @@ pop bp
 ret
 
 start:
-push dword 0x01                   ; 从第一个扇区开始，
-push word 513                     ; 拷贝513 个字符
-push word hdd_data                ; 到hdd_data 位置
+push dword 0x09                   ; 从第一个扇区开始，
+push word 10240                    ; 拷贝513 个字符
+push word loader                ; 到hdd_data 位置
 call readHdd
 sub esp, 8
 
+
+jmp loader
 
 push word hdd_data                ; 传递字符串地址
 push word 513                     ; 传递字符串长度
@@ -143,3 +145,5 @@ times 510-($-$$) db 0           ; 在真机上运行时，需要在mbr 区域添
 
 hdd_data:                       ; 预留两个扇区
 resb 1024
+
+loader equ 0x900
